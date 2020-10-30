@@ -1,6 +1,30 @@
 table,
-th,
-td {
-  border: 1px solid black;
+td,
+tr,
+th {
+  padding: 4px;
   border-collapse: collapse;
+}
+
+.border-bottom {
+  border-bottom: 1px solid black;
+}
+
+.border-side {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.credit {
+  padding-left: 12px;
+}
+
+.explanation {
+  padding-left: 20px;
+}
+
+@media print {
+  .pagebreak {
+    page-break-after: always;
+  } /* page-break-after works, as well */
 }

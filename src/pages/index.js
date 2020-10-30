@@ -41,7 +41,7 @@ export default class Home extends Component {
         <div>
           <h1>Recording Helper</h1>
           <AceEditorCom onChange={this.onChange} />
-          <br></br>
+          <div className="pagebreak"> </div>
           <GeneralJournal journal={this.state.journal} />
         </div>
       )

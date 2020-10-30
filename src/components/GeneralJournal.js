@@ -1,79 +1,48 @@
-import React from "react"
+import React, { Fragment } from "react"
 
 const GeneralJournal = ({ journal: transactions }) => {
   let id = 0
   const Records = () => {
     return transactions.map(transaction => {
-      let titles = []
-      let refs = []
-      let debs = []
-      let creds = []
       const {
         debit: debits,
         credit: credits,
       } = transaction.getTransactionEvents()
 
-      debits.map(debit => {
-        titles.push(debit.accountName)
-        refs.push(debit.accountNo)
-        debs.push(debit.amount)
-        creds.push(0)
-      })
-      credits.map(credit => {
-        titles.push(credit.accountName)
-        refs.push(credit.accountNo)
-        creds.push(credit.amount)
-        debs.push(0)
-      })
-
       return (
-        <tr key={++id}>
-          <td>{transaction.getDate()}</td>
-          <td>
-            <table>
-              <tbody>
-                <AccTitles titles={titles} idPrefix={100} />
-              </tbody>
-            </table>
-          </td>
-          <td>
-            <table>
-              <tbody>
-                <AccRefs refs={refs} idPrefix={200} />
-              </tbody>
-            </table>
-          </td>
-          <td>
-            <table>
-              <tbody>
-                <AccDebs debs={debs} idPrefix={300} />
-              </tbody>
-            </table>
-          </td>
-          <td>
-            <table>
-              <tbody>
-                <AccCreds creds={creds} idPrefix={400} />
-              </tbody>
-            </table>
-          </td>
-        </tr>
+        <Fragment key={++id}>
+          <tr className="border-bottom">
+            <td rowSpan={debits.length + credits.length + 2}>
+              {transaction.getDate()}
+            </td>
+          </tr>
+          <Debits debits={debits} />
+          <Credits credits={credits} />
+          <tr className="border-bottom">
+            <td className="explanation border-side">
+              {"(" + transaction.getExplanation() + ")"}
+            </td>
+            <td className="border-side"></td>
+            <td className="border-side"></td>
+            <td className="border-side"></td>
+          </tr>
+        </Fragment>
       )
     })
   }
 
   return (
-    <table className="mainTable">
+    <table className="border-bottom border-side">
       <thead>
-        <tr>
+        <tr className="border-bottom border-side">
           <th colSpan={5}>General Ledger - Page J1</th>
         </tr>
-        <tr>
-          <th>Date</th>
-          <th>Account Titles and Explanation</th>
-          <th>Ref.</th>
-          <th>Debit</th>
-          <th>Credit</th>
+        <tr className="border-bottom border-side">
+          <th className="border-side">Date</th>
+          <th className="border-side">Account Titles and Explanation</th>
+          <th className="border-side">Ref.</th>
+          <th className="border-side">Debit</th>
+          <th className="border-side">Credit</th>
         </tr>
       </thead>
       <tbody>
@@ -83,48 +52,28 @@ const GeneralJournal = ({ journal: transactions }) => {
   )
 }
 
-const AccTitles = ({ titles, idPrefix }) => {
+const Debits = ({ debits }) => {
   let id = 0
-  return titles.map(name => {
-    return (
-      <tr key={++id + idPrefix}>
-        <td>{name}</td>
-      </tr>
-    )
-  })
+  return debits.map(debit => (
+    <tr key={++id + 100}>
+      <td className="border-side">{debit.accountName}</td>
+      <td className="border-side">{debit.accountNo}</td>
+      <td className="border-side">{debit.amount}</td>
+      <td className="border-side"></td>
+    </tr>
+  ))
 }
 
-const AccRefs = ({ refs, idPrefix }) => {
+const Credits = ({ credits }) => {
   let id = 0
-  return refs.map(ref => {
-    return (
-      <tr key={++id + idPrefix}>
-        <td>{ref}</td>
-      </tr>
-    )
-  })
-}
-
-const AccDebs = ({ debs, idPrefix }) => {
-  let id = 0
-  return debs.map(deb => {
-    return (
-      <tr key={++id + idPrefix}>
-        <td>{deb}</td>
-      </tr>
-    )
-  })
-}
-
-const AccCreds = ({ creds, idPrefix }) => {
-  let id = 0
-  return creds.map(cred => {
-    return (
-      <tr key={++id + idPrefix}>
-        <td>{cred}</td>
-      </tr>
-    )
-  })
+  return credits.map(credit => (
+    <tr key={++id + 200}>
+      <td className="credit border-side">{credit.accountName}</td>
+      <td className="border-side">{credit.accountNo}</td>
+      <td className="border-side"></td>
+      <td className="border-side">{credit.amount}</td>
+    </tr>
+  ))
 }
 
 export default GeneralJournal
