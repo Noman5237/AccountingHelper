@@ -1,8 +1,10 @@
 import React, { Component } from "react"
 import { AceEditorCom } from "../components/AceEditorCom"
 import GeneralJournal from "../components/GeneralJournal"
+import GeneralLedger from "../components/GeneralLedger"
+import TrialBalance from "../components/TrialBalance"
 
-import { processAccounts, accountsBook } from "../modules/Account"
+import { processAccounts, resetAccountsGlobals } from "../modules/Account"
 import { processTransactions } from "../modules/Transaction"
 import "../style/index.css"
 
@@ -11,42 +13,55 @@ export default class Home extends Component {
     super(props)
     this.state = {
       journal: [],
+      account: undefined,
     }
   }
 
   componentDidMount() {}
 
   onChange = jsonSrc => {
-    let json
+    resetAccountsGlobals()
+    let json, account, journal
     try {
       json = JSON.parse(jsonSrc)
     } catch (error) {
       console.log(error)
       return
     }
-    console.log(json)
-    let account = processAccounts([json.account], "other")
-    console.log(account)
-    console.log(accountsBook)
-    let journal = processTransactions(json.transactions, accountsBook)
+    try {
+      account = processAccounts([json.account], "other")
+      journal = processTransactions(json.transactions, global.accountsBook)
+    } catch (error) {
+      console.log(error)
+      return
+    }
     this.setState({
       journal: journal,
+      account: account,
     })
-    console.log(journal)
   }
 
   render() {
-    try {
-      return (
-        <div>
-          <h1>Recording Helper</h1>
-          <AceEditorCom onChange={this.onChange} />
-          <div className="pagebreak"> </div>
-          <GeneralJournal journal={this.state.journal} />
-        </div>
-      )
-    } catch (error) {
-      console.log(error)
-    }
+    console.log(this.state.journal, this.state.account)
+    return (
+      <div>
+        <h1>Recording Helper</h1>
+        <AceEditorCom onChange={this.onChange} />
+        <div className="pagebreak"> </div>
+        <GeneralJournal journal={this.state.journal} />
+        <div className="pagebreak"> </div>
+        <GeneralLedger accountsList={global.accountsList} />
+        <div className="pagebreak"> </div>
+        {this.state.account !== undefined ? (
+          <TrialBalance
+            companyName={this.state.account[0].getName()}
+            date={this.state.journal[this.state.journal.length - 1].getDate()}
+            accountsList={global.accountsList}
+          />
+        ) : (
+          <div></div>
+        )}
+      </div>
+    )
   }
 }

@@ -34,8 +34,11 @@ const GeneralJournal = ({ journal: transactions }) => {
   return (
     <table className="border-bottom border-side">
       <thead>
-        <tr className="border-bottom border-side">
-          <th colSpan={5}>General Ledger - Page J1</th>
+        <tr
+          className="border-bottom border-side"
+          style={{ borderTop: "1px solid black" }}
+        >
+          <th colSpan={5}>General Journal - Page J1</th>
         </tr>
         <tr className="border-bottom border-side">
           <th className="border-side">Date</th>

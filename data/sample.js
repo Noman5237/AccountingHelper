@@ -83,7 +83,7 @@ const sampleSyntax = `{
     "transactions": [
       {
         "date": "9/1/2010",
-        "entry": ["cash", "bsc", 10000],
+        "entry": ["cash", "bsc", 20000],
         "explanation": "Owner’s investment of cash in business"
       },
       {

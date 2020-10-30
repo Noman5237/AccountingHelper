@@ -2,35 +2,45 @@ import React, { Component } from "react"
 import AceEditor from "react-ace"
 import "ace-builds/src-noconflict/mode-json"
 import "ace-builds/src-noconflict/theme-terminal"
-import "ace-builds/src-noconflict/keybinding-vim"
 
 import sampleSyntax from "../../data/sample"
 
 class AceEditorCom extends Component {
-  componentDidMount() {}
+  constructor(props) {
+    super(props)
+    this.refName = React.createRef()
+  }
 
-  onChange = async jsonSrc => {
-    await this.props.onChange(jsonSrc)
+  componentDidMount() {
+    var intervalId = setInterval(this.onChange, 5000)
+    // store intervalId in the state so it can be accessed later:
+    this.setState({ intervalId: intervalId })
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId)
+  }
+
+  onChange = async () => {
+    await this.props.onChange(this.refName.current.editor.getValue())
   }
 
   render() {
     return (
       <AceEditor
+        ref={this.refName}
         placeholder="Write your account book here"
         mode="json"
-        onChange={this.onChange}
         theme="terminal"
+        value={sampleSyntax}
         fontSize={16}
         showGutter={true}
         highlightActiveLine={true}
         className="aceEditorCom"
         style={{ width: "95%" }}
-        value={sampleSyntax}
+        // value={sampleSyntax}
         name="aceEditor"
-        editorProps={{ $blockScrolling: true }}
         setOptions={{
-          enableBasicAutocompletion: true,
-          enableLiveAutocompletion: true,
           showLineNumbers: true,
           tabSize: 2,
         }}

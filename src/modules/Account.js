@@ -7,6 +7,7 @@ class Account {
   #dbCr
   ledger
   accounts
+  #balance
 
   constructor(name, alias, accountType, dbCr = "+") {
     this.#accNo = getAccountNo(accountType)
@@ -15,6 +16,7 @@ class Account {
     this.ledger = new Ledger()
     this.accounts = []
     this.#dbCr = dbCr
+    this.#balance = 0
   }
 
   getName = () => {
@@ -25,8 +27,26 @@ class Account {
     return this.#alias
   }
 
-  formatTransaction = (amount, effect = "+") => {
+  getAccountNo = () => {
+    return this.#accNo
+  }
+
+  getBalance = () => {
+    return this.#balance
+  }
+
+  getDbCr = () => {
+    return this.#dbCr
+  }
+
+  requestTransaction = (amount, effect = "+", date) => {
     let dbCr = getDbCrString(this.#dbCr, effect)
+    this.#balance += (effect === "+" ? 1 : -1) * amount
+    this.ledger.addTransaction({
+      [dbCr]: amount,
+      balance: this.#balance,
+      date: date,
+    })
     return {
       [dbCr]: {
         accountNo: this.#accNo,
@@ -49,7 +69,7 @@ const getDbCrString = (accountDbCr, activityEffect) => {
   }
 }
 
-Account.accountNo = {
+global.accountNoPrefix = {
   asset: 100,
   liability: 200,
   oe: 300,
@@ -59,10 +79,11 @@ Account.accountNo = {
 }
 
 const getAccountNo = accountType => {
-  return ++Account.accountNo[accountType]
+  return ++global.accountNoPrefix[accountType]
 }
 
-const accountsBook = {}
+global.accountsBook = {}
+global.accountsList = []
 
 const processAccounts = (jsonAccounts, accountType, parentDbCr = "+") => {
   if (jsonAccounts === undefined) {
@@ -87,9 +108,9 @@ const processAccounts = (jsonAccounts, accountType, parentDbCr = "+") => {
     accounts.push(currAcc)
 
     // adding account to the dictionary
-    accountsBook[currAcc.getName()] = currAcc
+    global.accountsBook[currAcc.getName()] = currAcc
     if (currAcc.getAlias() !== undefined) {
-      accountsBook[currAcc.getAlias()] = currAcc
+      global.accountsBook[currAcc.getAlias()] = currAcc
     }
 
     // processing child accounts
@@ -99,6 +120,9 @@ const processAccounts = (jsonAccounts, accountType, parentDbCr = "+") => {
         accountType,
         account.dbCr
       )
+    } else {
+      // adding account to the list
+      global.accountsList.push(currAcc)
     }
   }
   return accounts
@@ -117,4 +141,17 @@ const setAccountType = accountAlias => {
   }
 }
 
-export { Account, processAccounts, accountsBook }
+const resetAccountsGlobals = () => {
+  global.accountsBook = {}
+  global.accountsList = []
+  global.accountNoPrefix = {
+    asset: 100,
+    liability: 200,
+    oe: 300,
+    rev: 400,
+    exp: 800,
+    other: 500,
+  }
+}
+
+export { Account, processAccounts, resetAccountsGlobals }

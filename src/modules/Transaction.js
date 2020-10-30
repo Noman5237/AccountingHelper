@@ -21,7 +21,7 @@ class Transaction {
   }
 
   getDate = () => {
-    return this.#date.toLocaleString()
+    return this.#date.toLocaleDateString()
   }
 
   getExplanation = () => {
@@ -45,9 +45,10 @@ const processTransactions = (transactions, accountsBook) => {
     for (let elem of transaction.entry) {
       if (typeof elem === "number") {
         for (let entry of accounts) {
-          let processedTransaction = entry.account.formatTransaction(
+          let processedTransaction = entry.account.requestTransaction(
             elem,
-            entry.effect
+            entry.effect,
+            transactionObj.getDate()
           )
           transactionObj.addTransactionEvent(processedTransaction)
         }
