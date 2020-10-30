@@ -14,4 +14,4 @@ class Ledger {
   }
 }
 
-module.exports = { Ledger }
+export { Ledger }

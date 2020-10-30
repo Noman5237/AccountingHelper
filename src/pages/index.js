@@ -1,11 +1,11 @@
 import React, { Component } from "react"
-import { AceEditorCom } from "../components/AceEditorCom"
-import GeneralJournal from "../components/GeneralJournal"
-import GeneralLedger from "../components/GeneralLedger"
-import TrialBalance from "../components/TrialBalance"
+import AceEditorCom from "../components/AceEditorCom.js"
+import GeneralJournal from "../components/GeneralJournal.js"
+import GeneralLedger from "../components/GeneralLedger.js"
+import TrialBalance from "../components/TrialBalance.js"
 
-import { processAccounts, resetAccountsGlobals } from "../modules/Account"
-import { processTransactions } from "../modules/Transaction"
+import { processAccounts, resetAccountsGlobals } from "../modules/Account.js"
+import { processTransactions } from "../modules/Transaction.js"
 import "../style/index.css"
 
 export default class Home extends Component {

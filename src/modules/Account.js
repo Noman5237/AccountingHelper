@@ -1,4 +1,4 @@
-import { Ledger } from "./Ledger"
+import { Ledger } from "./Ledger.js"
 
 class Account {
   #accNo
