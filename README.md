@@ -1,5 +1,17 @@
 Automatically Generates basic accounting tables from JSON data
 
+To build a development server:
+
+```
+git clone https://github.com/Noman5237/AccountingHelper.git accounting-helper
+cd accounting-helper
+npm install -g gatsby-cli
+npm install
+gatsby develop
+```
+
+Open your browser at localhost:8000
+
 ```
 {
   "account": {
