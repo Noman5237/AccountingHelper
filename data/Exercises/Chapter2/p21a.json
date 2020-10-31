@@ -1,0 +1,33 @@
+{
+  "account": {
+    "name": "$0",
+    "alias": "$1",
+    "account": [
+      {
+        "name": "Asset",
+        "alias": "asset",
+        "account": [{ "name": "Cash", "alias": "cash" }]
+      },
+      {
+        "name": "Liabilities",
+        "alias": "liability",
+        "account": [
+          { "name": "Accounts Payable", "alias": "ap" },
+          { "name": "Notes Payable", "alias": "np" }
+        ]
+      },
+      {
+        "name": "Owner's Equity",
+        "alias": "oe",
+        "account": [
+          { "name": ", Capital", "alias": "$2" },
+          { "name": ", Drawing", "alias": "$3" },
+          { "name": "Revenue", "alias": "rev", "account": [] },
+          { "name": "Expense", "alias": "exp", "account": [] }
+        ]
+      }
+    ]
+  },
+
+  "transactions": []
+}

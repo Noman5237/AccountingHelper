@@ -1,0 +1,89 @@
+{
+  "account": {
+    "name": "James Kent",
+    "alias": "jkcpa",
+    "account": [
+      {
+        "name": "Asset",
+        "alias": "asset",
+        "account": [
+          { "name": "Cash", "alias": "cash" },
+          { "name": "Office Supply", "alias": "offSup" },
+          { "name": "Accounts Receivable", "alias": "ar" }
+        ]
+      },
+      {
+        "name": "Liabilities",
+        "alias": "liability",
+        "account": [
+          { "name": "Accounts Payable", "alias": "ap" },
+          { "name": "Notes Payable", "alias": "np" },
+          { "name": "Unearned Revenue", "alias": "ueRev" }
+        ]
+      },
+      {
+        "name": "Owner's Equity",
+        "alias": "oe",
+        "account": [
+          { "name": "James Kent, Capital", "alias": "jkc" },
+          { "name": "James Kent, Drawing", "alias": "jkd" },
+          {
+            "name": "Revenue",
+            "alias": "rev",
+            "account": [{ "name": "Service Revenue", "alias": "serRev" }]
+          },
+          {
+            "name": "Expense",
+            "alias": "exp",
+            "account": [
+              { "name": "Rent Expense", "alias": "rentExp" },
+              { "name": "Salary Expense", "alias": "salExp" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "transactions": [
+    {
+      "date": "5/1/2020",
+      "entry": ["cash", "jkc", 25000],
+      "explanation": "Invested Cash in Business"
+    },
+    {
+      "date": "5/3/2020",
+      "entry": ["offSup", "ap", 2500],
+      "explanation": "Purchased supplies on account from Read Supply Company"
+    },
+    {
+      "date": "5/7/2020",
+      "entry": ["-cash", "rentExp", 900],
+      "explanation": "Paid office rent for the month."
+    },
+    {
+      "date": "7/11/2020",
+      "entry": ["ar", "serRev", 2100],
+      "explanation": "Completed a tax assignment and billed client for services provided"
+    },
+    {
+      "date": "7/12/2020",
+      "entry": ["cash", "ueRev", 3500],
+      "explanation": "Received advance on a management consulting engagement"
+    },
+    {
+      "date": "7/172020",
+      "entry": ["cash", "serRev", 1200],
+      "explanation": "Received cash of for services completed for H. Arnold Co."
+    },
+    {
+      "date": "7/31/2020",
+      "entry": ["-cash", "salExp", 2000],
+      "explanation": "Paid secretary-receptionist salary for the month."
+    },
+    {
+      "date": "7/31/2020",
+      "entry": ["-cash", "-ap", 1000],
+      "explanation": "Paid 40% of balance due Read Supply Company."
+    }
+  ]
+}

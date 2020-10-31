@@ -9,6 +9,9 @@ th {
 .border-bottom {
   border-bottom: 1px solid black;
 }
+.border-top {
+  border-top: 1px solid black;
+}
 
 .border-side {
   border-left: 1px solid black;

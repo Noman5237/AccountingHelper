@@ -7,6 +7,7 @@ import TrialBalance from "../components/TrialBalance.js"
 import { processAccounts, resetAccountsGlobals } from "../modules/Account.js"
 import { processTransactions } from "../modules/Transaction.js"
 import "../style/index.css"
+import sampleSyntax from "../../data/sampleSyntax"
 
 export default class Home extends Component {
   constructor(props) {
@@ -42,11 +43,10 @@ export default class Home extends Component {
   }
 
   render() {
-    console.log(this.state.journal, this.state.account)
     return (
       <div>
         <h1>Recording Helper</h1>
-        <AceEditorCom onChange={this.onChange} />
+        <AceEditorCom onChange={this.onChange} value={sampleSyntax} />
         <div className="pagebreak"> </div>
         <GeneralJournal journal={this.state.journal} />
         <div className="pagebreak"> </div>

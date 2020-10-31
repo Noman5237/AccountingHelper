@@ -22,7 +22,7 @@ const GeneralLedger = ({ accountsList }) => {
               <th className="border-side">Ref.</th>
               <th className="border-side">Debit</th>
               <th className="border-side">Credit</th>
-              <th className="border-side">Credit</th>
+              <th className="border-side">Balance</th>
             </tr>
           </thead>
           <tbody>

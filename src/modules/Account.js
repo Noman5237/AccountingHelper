@@ -152,6 +152,10 @@ const resetAccountsGlobals = () => {
     exp: 800,
     other: 500,
   }
+  global.trialBalance = {
+    debit: 0,
+    credit: 0,
+  }
 }
 
 export { Account, processAccounts, resetAccountsGlobals }
