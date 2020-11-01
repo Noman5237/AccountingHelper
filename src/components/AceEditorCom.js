@@ -1,8 +1,7 @@
 import React, { Component } from "react"
 import AceEditor from "react-ace"
-import "ace-builds/src-noconflict/mode-json"
-import "ace-builds/src-noconflict/theme-terminal"
-import sampleSyntax from "../../data/sampleSyntax"
+require("ace-builds/src-noconflict/mode-json")
+require("ace-builds/src-noconflict/theme-terminal")
 
 class AceEditorCom extends Component {
   constructor(props) {
@@ -16,6 +15,7 @@ class AceEditorCom extends Component {
 
   componentDidMount() {
     if (typeof AceEditor === "undefined") {
+      console.log(AceEditor)
       AceEditor = require("react-ace")
     }
 

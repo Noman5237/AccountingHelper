@@ -6,6 +6,7 @@
       {
         "name": "Asset",
         "alias": "asset",
+        "dbCr": "-",
         "account": [
           { "name": "Cash", "alias": "cash" },
           { "name": "Office Supply", "alias": "offSup" },
@@ -26,7 +27,7 @@
         "alias": "oe",
         "account": [
           { "name": "James Kent, Capital", "alias": "jkc" },
-          { "name": "James Kent, Drawing", "alias": "jkd" },
+          { "name": "James Kent, Drawing", "alias": "jkd", "dbCr": "-" },
           {
             "name": "Revenue",
             "alias": "rev",
@@ -35,6 +36,7 @@
           {
             "name": "Expense",
             "alias": "exp",
+            "dbCr": "-",
             "account": [
               { "name": "Rent Expense", "alias": "rentExp" },
               { "name": "Salary Expense", "alias": "salExp" }

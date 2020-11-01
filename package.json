@@ -14,7 +14,6 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
-    "@monaco-editor/react": "^3.6.3",
     "ace-builds": "^1.4.12",
     "gatsby": "^2.24.85",
     "react": "^16.12.0",
